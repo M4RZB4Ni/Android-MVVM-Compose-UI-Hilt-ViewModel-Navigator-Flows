@@ -38,7 +38,7 @@ fun AppNavHost(
         ) { backStackEntry ->
             val nodeId = backStackEntry.arguments?.getString("nodeID") ?: ""
             val viewModel = hiltViewModel<DetailsViewModel>()
-            DetailsScreen(modifier, viewModel, nodeId, navController)
+            DetailsScreen(viewModel, nodeId, navController)
         }
     }
 }
