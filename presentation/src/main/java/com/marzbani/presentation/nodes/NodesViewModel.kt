@@ -71,6 +71,41 @@ class NodesViewModel @Inject constructor(private val getNodesUseCase: GetNodesUs
         navController.navigate("details/${selectedNode.id}")
     }
 
+    // Function triggered when a tree node needs to be moved
+    fun onMoveClick(movedNode: TreeNodeEntity, newParentNode: TreeNodeEntity?) {
+        // Logging details before and after moving a node
+        Log.d("NodesViewModel", "Before Move:")
+        Log.d("NodesViewModel", "Moved Node: $movedNode")
+        Log.d("NodesViewModel", "New Parent Node: $newParentNode")
+        Log.d("NodesViewModel", "Original Nodes: ${_nodesData.value}")
+
+        // Move the node and update the StateFlow
+        val updatedNodes = moveNode(_nodesData.value, movedNode, newParentNode)
+
+        // Logging details after moving a node
+        Log.d("NodesViewModel", "After Move:")
+        Log.d("NodesViewModel", "Updated Nodes: $updatedNodes")
+
+        // Update the StateFlow with the new node arrangement
+        _nodesData.value = updatedNodes
+    }
+
+    // Recursive function to move a tree node within the hierarchy
+    private fun moveNode(nodes: List<TreeNodeEntity>, movedNode: TreeNodeEntity, newParentNode: TreeNodeEntity?): List<TreeNodeEntity> {
+        return nodes.map { node ->
+            when (node) {
+                movedNode -> {
+                    node.copy(children = moveNode(node.children.orEmpty(), movedNode, null))
+                }
+                newParentNode -> {
+                    node.copy(children = node.children.orEmpty() + movedNode)
+                }
+                else -> {
+                    node.copy(children = moveNode(node.children.orEmpty(), movedNode, newParentNode))
+                }
+            }
+        }.filterNot { it == movedNode }
+    }
 
 
 
