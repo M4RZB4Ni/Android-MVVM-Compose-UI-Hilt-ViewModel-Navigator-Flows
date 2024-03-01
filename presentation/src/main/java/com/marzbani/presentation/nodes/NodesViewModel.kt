@@ -65,5 +65,13 @@ class NodesViewModel @Inject constructor(private val getNodesUseCase: GetNodesUs
             .map { it.copy(children = removeNodeRecursively(it.children.orEmpty(), targetNode)) }
     }
 
+    // Function triggered when a tree node is clicked, navigating to a details screen
+    fun onItemClick(selectedNode: TreeNodeEntity, navController: NavController) {
+        Log.e("selectedNode", selectedNode.id.toString())
+        navController.navigate("details/${selectedNode.id}")
+    }
+
+
+
 
 }
