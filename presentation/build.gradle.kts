@@ -51,6 +51,8 @@ dependencies {
 
     // Compose dependencies
     implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    implementation(platform("androidx.compose:compose-bom:2023.08.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     kapt("com.google.dagger:hilt-android-compiler:2.50")
 
