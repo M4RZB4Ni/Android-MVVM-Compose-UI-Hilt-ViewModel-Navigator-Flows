@@ -7,6 +7,4 @@ data class DetailsEntity(
     val lastModifiedAt: String,
     val lastModifiedBy: String,
     val description: String
-){
-    constructor(): this("","","","","","")
-}
+)
