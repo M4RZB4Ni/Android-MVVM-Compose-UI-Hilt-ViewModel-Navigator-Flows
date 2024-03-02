@@ -2,6 +2,7 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.dokka")
     kotlin("kapt")
 }
 
@@ -21,6 +22,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -32,6 +34,7 @@ dependencies {
 
     // Dagger Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.50")
+    testImplementation("junit:junit:4.13.2")
     kapt("com.google.dagger:hilt-android-compiler:2.50")
 
     // Retrofit dependencies
@@ -58,12 +61,12 @@ dependencies {
     // JUnit and MockK for testing
     testImplementation("junit:junit:4.13.2")
     testImplementation("io.mockk:mockk:1.13.8")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation("androidx.test:runner:1.5.2")
     testImplementation("com.google.dagger:hilt-android-testing:2.50")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.50")
+    kaptTest("com.google.dagger:hilt-android-compiler:2.50")
     testImplementation("org.robolectric:robolectric:4.5.1")
+
+
 }
 
 kapt {
