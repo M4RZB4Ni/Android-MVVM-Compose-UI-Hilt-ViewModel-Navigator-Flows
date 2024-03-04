@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.marzbani.domain.entity.TreeNodeEntity
 
 
-/*
+/**
  * TreeNodeContent is a Composable function responsible for rendering the content of a tree node in a Row layout.
  * It takes a TreeNodeEntity and a callback function onItemClick as parameters.
  *

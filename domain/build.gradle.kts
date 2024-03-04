@@ -3,7 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.dokka")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
+
 }
 
 android {
@@ -13,6 +14,7 @@ android {
     defaultConfig {
         minSdk = 26
     }
+
     hilt {
         enableAggregatingTask = true
     }
@@ -24,12 +26,18 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    subprojects {
+        apply(plugin = "org.jetbrains.dokka")
+//        tasks.dokkaHtmlPartial.dependsOn(":data:kaptReleaseKotlin")
+//        tasks.dokkaHtmlPartial.dependsOn(":data:kaptDebugKotlin")
+
+    }
 }
 
 dependencies {
     // Dagger Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
 
     // Kotlin dependencies
     api(platform("org.jetbrains.kotlin:kotlin-bom:1.9.22"))
@@ -48,8 +56,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    testImplementation ("androidx.arch.core:core-testing:2.2.0")
+    testImplementation ("org.robolectric:robolectric:4.11.1")
+
 }
 
-kapt {
-    correctErrorTypes = true
-}
+

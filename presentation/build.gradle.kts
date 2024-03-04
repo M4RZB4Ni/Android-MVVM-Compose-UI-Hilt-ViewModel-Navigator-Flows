@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.dokka")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -18,6 +18,7 @@ android {
             useSupportLibrary = true
         }
     }
+
 
     hilt {
         enableAggregatingTask = true
@@ -40,9 +41,16 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    subprojects {
+        apply(plugin = "org.jetbrains.dokka")
+//        tasks.dokkaHtmlPartial.dependsOn(":presentation:kaptReleaseKotlin")
+
+    }
+
 }
 
 dependencies {
+
     // Project dependency
     implementation(project(":domain"))
 
@@ -57,7 +65,7 @@ dependencies {
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.01"))
     androidTestImplementation(platform("androidx.compose:compose-bom:2024.02.01"))
     androidTestImplementation(project(":data"))
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
 
     // AndroidX dependencies
     implementation("androidx.core:core-ktx:1.12.0")
@@ -87,9 +95,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.50")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.50")
+    kspAndroidTest("com.google.dagger:hilt-android-compiler:2.50")
 }
 
-kapt {
-    correctErrorTypes = true
-}

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Icon
@@ -16,7 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.marzbani.presentation.R
 
-/*
+/**
  * TreeNodeEditActions is a Composable function responsible for rendering edit actions (remove and move) for a tree node.
  * It provides IconButton components for removing and moving the tree node.
  *
@@ -47,7 +48,7 @@ fun TreeNodeEditActions(
         // IconButton for moving the tree node
         IconButton(onClick = onMoveClick) {
             Icon(
-                imageVector = Icons.Default.ArrowForward,
+                imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                 contentDescription = stringResource(id = R.string.move), // Content description for accessibility
                 tint = MaterialTheme.colorScheme.secondary // Use secondary color for visual indication
             )
