@@ -14,7 +14,13 @@ import com.marzbani.presentation.details.DetailsViewModel
 import com.marzbani.presentation.nodes.NodesViewModel
 import com.marzbani.presentation.nodes.NodesScreen
 
-// Composable function defining the navigation host for the app
+/**
+ * Composable function defining the navigation host for the app.
+ *
+ * @param modifier Custom modifier for additional styling if needed.
+ * @param navController NavHostController for handling the route.
+ * @param startDestination Starting destination for the navigation host.
+ */
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
