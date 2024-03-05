@@ -1,3 +1,4 @@
+// NetworkModule.kt
 package com.marzbani.data.di
 
 import android.content.Context
@@ -22,14 +23,25 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-//Url for the Retrofit
+// Base URL for the Retrofit
 const val BASE_URL = "https://ubique.img.ly/frontend-tha/"
 
+
+/**
+ * Dagger Hilt module providing network-related dependencies such as Retrofit, OkHttpClient, Gson, etc.
+ */
 @InstallIn(SingletonComponent::class)
 @Module
 object NetworkModule {
 
-    // Provides Retrofit instance
+    /**
+     * Provides Retrofit instance for making network requests.
+     *
+     * @param gsonConverterFactory Gson converter factory for handling JSON serialization and deserialization.
+     * @param rxJava2CallAdapterFactory RxJava adapter factory for supporting reactive programming with Retrofit.
+     * @param okHttpClient OkHttpClient instance for configuring network requests.
+     * @return Configured Retrofit instance.
+     */
     @Provides
     @Singleton
     fun providesRetrofit(
@@ -45,7 +57,12 @@ object NetworkModule {
             .build()
     }
 
-    // Provides OkHttpClient instance
+    /**
+     * Provides OkHttpClient instance for configuring network-related settings such as caching, timeouts, and logging.
+     *
+     * @param context Application context for accessing the cache directory.
+     * @return Configured OkHttpClient instance.
+     */
     @Provides
     @Singleton
     fun providesOkHttpClient(
@@ -71,28 +88,45 @@ object NetworkModule {
         return client.build()
     }
 
-    // Provides Gson instance
+    /**
+     * Provides Gson instance for handling JSON serialization and deserialization.
+     *
+     * @return Gson instance.
+     */
     @Provides
     @Singleton
     fun providesGson(): Gson {
         return Gson()
     }
 
-    // Provides GsonConverterFactory instance
+    /**
+     * Provides GsonConverterFactory instance for Retrofit.
+     *
+     * @return GsonConverterFactory instance.
+     */
     @Provides
     @Singleton
     fun providesGsonConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
     }
 
-    // Provides RxJava2CallAdapterFactory instance
+    /**
+     * Provides RxJava2CallAdapterFactory instance for Retrofit.
+     *
+     * @return RxJava2CallAdapterFactory instance.
+     */
     @Provides
     @Singleton
     fun providesRxJavaCallAdapterFactory(): RxJava2CallAdapterFactory {
         return RxJava2CallAdapterFactory.create()
     }
 
-    // Provides network availability status
+    /**
+     * Provides network availability status using ConnectivityManager.
+     *
+     * @param context Application context for accessing ConnectivityManager.
+     * @return Boolean indicating whether the device has an active network connection.
+     */
     @Provides
     @Singleton
     fun provideIsNetworkAvailable(@ApplicationContext context: Context): Boolean {
@@ -110,21 +144,36 @@ object NetworkModule {
         }
     }
 
-    // Provides NodesService instance
+    /**
+     * Provides NodesService instance for making API calls related to nodes.
+     *
+     * @param retrofit Retrofit instance for creating the service.
+     * @return NodesService instance.
+     */
     @Singleton
     @Provides
     fun provideNodesService(retrofit: Retrofit): NodesService {
         return retrofit.create(NodesService::class.java)
     }
 
-    // Provides MapperFactory instance
+    /**
+     * Provides MapperFactory instance for creating mappers used in data mapping.
+     *
+     * @return MapperFactory instance.
+     */
     @Singleton
     @Provides
     fun provideMapperFactory(): MapperFactory {
         return MapperFactoryImpl()
     }
 
-    // Provides NodesRepository instance
+    /**
+     * Provides NodesRepository instance for managing node-related data.
+     *
+     * @param retrofitService NodesService instance for making API calls.
+     * @param mapperFactory MapperFactory instance for creating entity mappers.
+     * @return NodesRepository instance.
+     */
     @Singleton
     @Provides
     fun provideNodesRepository(
