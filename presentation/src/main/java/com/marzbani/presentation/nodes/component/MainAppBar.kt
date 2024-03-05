@@ -22,9 +22,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.marzbani.presentation.R
 
-// MainAppBar.kt
-
-// Composable function for the main app bar, used in the UI.
+/**
+ * Composable function for the main app bar, used in the UI.
+ *
+ * @param modifier Optional modifier for customization.
+ * @param onEditClick Click listener for the edit icon.
+ */
 @Composable
 fun MainAppBar(
     modifier: Modifier = Modifier, // Optional modifier for customization
