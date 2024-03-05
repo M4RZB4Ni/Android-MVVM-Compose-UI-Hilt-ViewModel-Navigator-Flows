@@ -3,6 +3,7 @@ package com.marzbani.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
+// Light theme colors
 val md_theme_light_primary = Color(0xFF825500)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFFFDDB3)
@@ -33,6 +34,7 @@ val md_theme_light_surfaceTint = Color(0xFF825500)
 val md_theme_light_outlineVariant = Color(0xFFD3C4B4)
 val md_theme_light_scrim = Color(0xFF000000)
 
+// Dark theme colors
 val md_theme_dark_primary = Color(0xFFFFB951)
 val md_theme_dark_onPrimary = Color(0xFF452B00)
 val md_theme_dark_primaryContainer = Color(0xFF633F00)
@@ -62,5 +64,3 @@ val md_theme_dark_inversePrimary = Color(0xFF825500)
 val md_theme_dark_surfaceTint = Color(0xFFFFB951)
 val md_theme_dark_outlineVariant = Color(0xFF4F4539)
 val md_theme_dark_scrim = Color(0xFF000000)
-
-
