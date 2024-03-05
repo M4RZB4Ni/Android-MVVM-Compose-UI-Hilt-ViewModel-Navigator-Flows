@@ -16,6 +16,7 @@ android {
         testInstrumentationRunner = "com.marzbani.data.HiltTestRunner"
     }
 
+
     hilt {
         enableAggregatingTask = true
     }
@@ -35,6 +36,7 @@ android {
 
     }
 }
+
 
 dependencies {
     // Project dependency
