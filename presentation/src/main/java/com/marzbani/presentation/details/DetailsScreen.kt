@@ -26,12 +26,18 @@ import com.marzbani.presentation.R
 import com.marzbani.presentation.details.component.DetailsAppBar
 import com.marzbani.presentation.details.component.DetailsCardItem
 
-
+/**
+ * Composable function representing the details screen.
+ *
+ * @param viewModel ViewModel for managing details screen data.
+ * @param nodeId Id of each node to determine it.
+ * @param navController NavHostController for handling the route.
+ */
 @Composable
 fun DetailsScreen(
-    viewModel: DetailsViewModel, // viewModel as DetailsViewModel
-    nodeId: String, // id of each node to determine it
-    navController: NavHostController // NavHostController for handling the route
+    viewModel: DetailsViewModel,
+    nodeId: String,
+    navController: NavHostController
 ) {
     // Launch effect to fetch details data when the composable is initially launched
     LaunchedEffect(viewModel) {

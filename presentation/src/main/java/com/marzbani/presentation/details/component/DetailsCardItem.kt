@@ -12,6 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+/**
+ * Composable function representing a card item in the details screen.
+ *
+ * @param label The label to be displayed.
+ * @param value The value to be displayed.
+ */
 @Composable
 fun DetailsCardItem(label: String, value: String) {
     // Card for styling and elevation

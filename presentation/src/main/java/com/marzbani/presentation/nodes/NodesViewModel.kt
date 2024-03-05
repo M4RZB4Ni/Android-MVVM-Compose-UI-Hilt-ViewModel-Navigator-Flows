@@ -13,6 +13,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
+/**
+ * NodesViewModel is a ViewModel class responsible for handling the logic and data related to the NodesScreen.
+ *
+ * @param getNodesUseCase The use case responsible for fetching tree node data.
+ */
 @HiltViewModel
 class NodesViewModel @Inject constructor(private val getNodesUseCase: GetNodesUseCase) : ViewModel() {
 
@@ -106,7 +111,4 @@ class NodesViewModel @Inject constructor(private val getNodesUseCase: GetNodesUs
             }
         }.filterNot { it == movedNode }
     }
-
-
-
 }

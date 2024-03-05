@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.marzbani.domain.entity.TreeNodeEntity
 
-/*
+/**
  * TreeNodeItem is a Composable function responsible for rendering a tree node as a Card in the UI.
  * It displays the content of the node and, if available, recursively renders its children using LazyColumn.
  * In edit mode, it also shows edit actions for removing and moving the node.
@@ -95,7 +95,3 @@ fun TreeNodeItem(
         }
     }
 }
-
-
-
-

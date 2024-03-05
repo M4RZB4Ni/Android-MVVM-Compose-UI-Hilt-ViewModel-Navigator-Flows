@@ -13,7 +13,14 @@ import androidx.navigation.NavHostController
 import com.marzbani.presentation.nodes.component.MainAppBar
 import com.marzbani.presentation.nodes.component.TreeNodeItem
 
-
+/**
+ * NodesScreen is a Composable function responsible for displaying the list of tree nodes.
+ * It utilizes a LazyColumn to efficiently handle the display of tree nodes using TreeNodeItem.
+ *
+ * @param modifier The modifier for styling and positioning the NodesScreen.
+ * @param viewModel The NodesViewModel containing the logic and data for the screen.
+ * @param navController The NavHostController for handling navigation within the app.
+ */
 @Composable
 fun NodesScreen(
     modifier: Modifier,
@@ -54,6 +61,3 @@ fun NodesScreen(
         )
     }
 }
-
-
-

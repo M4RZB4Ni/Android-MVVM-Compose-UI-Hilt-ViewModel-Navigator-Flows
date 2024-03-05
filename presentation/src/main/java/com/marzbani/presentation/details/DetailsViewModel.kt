@@ -9,6 +9,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
+/**
+ * ViewModel class for the details screen.
+ *
+ * @param detailsUseCase The use case for fetching details data.
+ */
 @HiltViewModel
 class DetailsViewModel @Inject constructor(private val detailsUseCase: GetDetailsUseCase) : ViewModel() {
 
@@ -18,7 +23,11 @@ class DetailsViewModel @Inject constructor(private val detailsUseCase: GetDetail
     // Exposed StateFlow to observe details data changes
     val details: StateFlow<DetailsEntity> get() = _details
 
-    // Function to fetch details data based on the provided nodeId
+    /**
+     * Function to fetch details data based on the provided nodeId.
+     *
+     * @param nodeId The id of the node to fetch details for.
+     */
     fun getDetails(nodeId: String) {
         detailsUseCase.execute(
             params = nodeId,
@@ -26,16 +35,20 @@ class DetailsViewModel @Inject constructor(private val detailsUseCase: GetDetail
                 // Update the MutableStateFlow with the fetched details data
                 _details.value = it
             },
-            onError = {
+            onError = { error ->
                 // Handle error by printing the stack trace
-                error->handleDataLoadError(error)
+                handleDataLoadError(error)
             }
         )
     }
 
-    // Function to handle errors during data loading
+    /**
+     * Function to handle errors during data loading.
+     *
+     * @param error The Throwable object representing the error.
+     */
     private fun handleDataLoadError(error: Throwable) {
-        // show an error message to the user
-        Log.e("NodesViewModel", "Error loading data: ${error.message}", error)
+        // Show an error message to the user and log the error
+        Log.e("DetailsViewModel", "Error loading data: ${error.message}", error)
     }
 }

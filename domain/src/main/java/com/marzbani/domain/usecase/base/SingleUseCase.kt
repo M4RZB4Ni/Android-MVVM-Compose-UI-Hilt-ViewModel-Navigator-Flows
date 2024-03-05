@@ -18,7 +18,7 @@ abstract class SingleUseCase<in Params, T> : UseCase() {
      * @param params Parameters required for the use case.
      * @return Single representing the asynchronous operation.
      */
-    internal abstract fun buildUseCaseSingle(params: Params): Single<T>
+     abstract fun buildUseCaseSingle(params: Params): Single<T>
 
     /**
      * Execute the Single use case with the given parameters.

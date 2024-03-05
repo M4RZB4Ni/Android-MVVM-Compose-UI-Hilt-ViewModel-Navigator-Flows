@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material3.Card
@@ -24,37 +24,45 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.marzbani.presentation.R
 
+/**
+ * Composable function representing the AppBar in the details screen.
+ *
+ * @param modifier Custom modifier for additional styling if needed.
+ * @param onBackClick Callback for handling back button click.
+ * @param onEditClick Callback for handling edit button click.
+ * @param onShareClick Callback for handling share button click.
+ */
 @Composable
 fun DetailsAppBar(
-    modifier: Modifier = Modifier,            // Custom modifier for additional styling if needed
-    onBackClick: () -> Unit,                   // Callback for handling back button click
-    onEditClick: () -> Unit,                   // Callback for handling edit button click
-    onShareClick: () -> Unit                   // Callback for handling share button click
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
+    onEditClick: () -> Unit,
+    onShareClick: () -> Unit
 ) {
     // Card for styling and elevation
     Card(
-        modifier = modifier.fillMaxWidth(),    // Full width modifier
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),  // Card elevation
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),  // Custom color for the card
+        modifier = modifier.fillMaxWidth(),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary),
     ) {
         // Row for horizontal arrangement of back button and icons
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),  // Padding for the entire row
+                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             // Back button with click handling
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = stringResource(id = R.string.back),
                 tint = Color.White,
                 modifier = Modifier
-                    .size(24.dp)  // Set a consistent icon size
-                    .padding(8.dp)  // Padding for the back button
-                    .clip(CircleShape)  // Clip to create a circular shape
-                    .clickable { onBackClick() }  // Click handler for back button
+                    .size(24.dp)
+                    .padding(8.dp)
+                    .clip(CircleShape)
+                    .clickable { onBackClick() }
             )
 
             // Row for edit and share icons with spacing
@@ -68,9 +76,9 @@ fun DetailsAppBar(
                     contentDescription = stringResource(id = R.string.edit),
                     tint = Color.White,
                     modifier = Modifier
-                        .size(24.dp)  // Set a consistent icon size
-                        .clip(CircleShape)  // Clip to create a circular shape
-                        .clickable { onEditClick() }  // Click handler for edit icon
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .clickable { onEditClick() }
                 )
 
                 // Share icon with click handling
@@ -79,12 +87,11 @@ fun DetailsAppBar(
                     contentDescription = stringResource(id = R.string.share),
                     tint = Color.White,
                     modifier = Modifier
-                        .size(24.dp)  // Set a consistent icon size
-                        .clip(CircleShape)  // Clip to create a circular shape
-                        .clickable { onShareClick() }  // Click handler for share icon
+                        .size(24.dp)
+                        .clip(CircleShape)
+                        .clickable { onShareClick() }
                 )
             }
         }
     }
 }
-

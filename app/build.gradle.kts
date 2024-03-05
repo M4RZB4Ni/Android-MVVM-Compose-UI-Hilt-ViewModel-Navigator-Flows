@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("org.jetbrains.dokka")
-    kotlin("kapt")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -48,6 +48,9 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    subprojects {
+        apply(plugin = "org.jetbrains.dokka")
+    }
 }
 
 dependencies {
@@ -61,7 +64,7 @@ dependencies {
 
     // Dagger Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.50")
-    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
 
     // AndroidX Core and Lifecycle
     implementation("androidx.core:core-ktx:1.12.0")
