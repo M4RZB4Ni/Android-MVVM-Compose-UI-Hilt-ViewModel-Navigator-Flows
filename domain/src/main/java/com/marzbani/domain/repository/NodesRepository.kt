@@ -14,7 +14,7 @@ interface NodesRepository {
      * Retrieves a list of tree nodes based on the provided URL.
      *
      * @param url The URL to fetch tree nodes from.
-     * @return A Single emitting a list of [TreeNodeEntity] representing the tree nodes.
+     * @return A [Flow] emitting a list of [TreeNodeEntity] representing the tree nodes.
      */
     suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>>
 
@@ -22,7 +22,7 @@ interface NodesRepository {
      * Retrieves additional data for a specific data code.
      *
      * @param dataCode The code associated with the data for which additional information is requested.
-     * @return A Single emitting a [DetailsEntity] containing additional details.
+     * @return A [Flow] emitting a [DetailsEntity] containing additional details.
      */
     suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity>
 }

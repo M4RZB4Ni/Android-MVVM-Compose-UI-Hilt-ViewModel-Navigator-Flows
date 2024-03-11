@@ -7,7 +7,6 @@ import com.marzbani.data.source.NodesService
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.entity.TreeNodeEntity
 import com.marzbani.domain.repository.NodesRepository
-import io.reactivex.Single
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
@@ -29,7 +28,7 @@ class NodesRepositoryImpl(
      * Retrieves a list of tree nodes based on the provided URL.
      *
      * @param url The URL for retrieving tree nodes.
-     * @return A [Single] emitting the list of [TreeNodeEntity] objects.
+     * @return A [Flow] emitting the list of [TreeNodeEntity] objects.
      */
     override suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>> {
         return try {
@@ -44,7 +43,7 @@ class NodesRepositoryImpl(
      * Retrieves additional data for a specific data code.
      *
      * @param dataCode The data code for retrieving additional data.
-     * @return A [Single] emitting the [DetailsEntity] object.
+     * @return A [Flow] emitting the [DetailsEntity] object.
      */
     override suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity> {
         return try {

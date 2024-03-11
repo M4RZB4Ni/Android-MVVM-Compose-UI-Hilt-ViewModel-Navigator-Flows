@@ -3,13 +3,18 @@ package com.marzbani.domain
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.fake.FakeNodeRepository
 import com.marzbani.domain.usecase.GetDetailsUseCase
-import org.junit.After
+import junit.framework.TestCase.assertEquals
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
 
 //@Config(manifest=Config.NONE)// Choose an appropriate version
 //@RunWith(RobolectricTestRunner::class)
+
+@ExperimentalCoroutinesApi
 class GetDetailsUseCaseTest {
 
     private lateinit var detailsUseCase: GetDetailsUseCase
@@ -28,16 +33,19 @@ class GetDetailsUseCaseTest {
 
 
     @Test
-    fun getAdditionalData() {
+    fun getAdditionalData(): Unit = runBlocking {
+
+        val movies = detailsUseCase("data").first()
+        assertEquals(detailsItem,movies)
 
 
 
 
     }
-    @After
-    fun finish(){
-
-    }
+//    @After
+//    fun finish(){
+//
+//    }
 
 //    @Test
 //    fun `Get Movie Details, correct movie id return` (): Unit = runBlocking{
