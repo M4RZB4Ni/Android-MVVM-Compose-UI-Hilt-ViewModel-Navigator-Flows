@@ -1,12 +1,13 @@
 package com.marzbani.presentation.details
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.usecase.GetDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -29,26 +30,11 @@ class DetailsViewModel @Inject constructor(private val detailsUseCase: GetDetail
      * @param nodeId The id of the node to fetch details for.
      */
     fun getDetails(nodeId: String) {
-        detailsUseCase.execute(
-            params = nodeId,
-            onSuccess = {
-                // Update the MutableStateFlow with the fetched details data
+        viewModelScope.launch {
+            detailsUseCase.invoke(nodeId).collect{
                 _details.value = it
-            },
-            onError = { error ->
-                // Handle error by printing the stack trace
-                handleDataLoadError(error)
             }
-        )
+        }
     }
 
-    /**
-     * Function to handle errors during data loading.
-     *
-     * @param error The Throwable object representing the error.
-     */
-    private fun handleDataLoadError(error: Throwable) {
-        // Show an error message to the user and log the error
-        Log.e("DetailsViewModel", "Error loading data: ${error.message}", error)
-    }
 }

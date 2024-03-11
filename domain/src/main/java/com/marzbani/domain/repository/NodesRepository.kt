@@ -3,7 +3,7 @@ package com.marzbani.domain.repository
 
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.entity.TreeNodeEntity
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Repository interface for managing node-related data.
@@ -16,7 +16,7 @@ interface NodesRepository {
      * @param url The URL to fetch tree nodes from.
      * @return A Single emitting a list of [TreeNodeEntity] representing the tree nodes.
      */
-    fun getNodes(url: String): Single<List<TreeNodeEntity>>
+    suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>>
 
     /**
      * Retrieves additional data for a specific data code.
@@ -24,5 +24,5 @@ interface NodesRepository {
      * @param dataCode The code associated with the data for which additional information is requested.
      * @return A Single emitting a [DetailsEntity] containing additional details.
      */
-    fun getAdditionalData(dataCode: String): Single<DetailsEntity>
+    suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity>
 }

@@ -8,6 +8,9 @@ import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.entity.TreeNodeEntity
 import com.marzbani.domain.repository.NodesRepository
 import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
 
 /**
  * Implementation of the [NodesRepository] interface for handling node-related data.
@@ -28,9 +31,13 @@ class NodesRepositoryImpl(
      * @param url The URL for retrieving tree nodes.
      * @return A [Single] emitting the list of [TreeNodeEntity] objects.
      */
-    override fun getNodes(url: String): Single<List<TreeNodeEntity>> {
-        return service.getNodes(url)
-            .map { nodeMap.toEntityList(it) }
+    override suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>> {
+        return try {
+            service.getNodes(url)
+                .map { nodeMap.toEntityList(it) }
+        }catch (e: Exception){
+            flowOf(emptyList())
+        }
     }
 
     /**
@@ -39,8 +46,13 @@ class NodesRepositoryImpl(
      * @param dataCode The data code for retrieving additional data.
      * @return A [Single] emitting the [DetailsEntity] object.
      */
-    override fun getAdditionalData(dataCode: String): Single<DetailsEntity> {
-        return service.getAdditionalData(dataCode)
-            .map { detailsEntityMapper.toEntity(it) }
+    override suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity> {
+        return try {
+
+            service.getAdditionalData(dataCode)
+                .map { detailsEntityMapper.toEntity(it) }
+        }catch (e:Exception){
+            flowOf(DetailsEntity())
+        }
     }
 }

@@ -8,11 +8,13 @@ plugins {
 }
 
 android {
+
     namespace = "com.marzbani.data"
     compileSdk = 34
 
     defaultConfig {
         minSdk = 26
+
         testInstrumentationRunner = "com.marzbani.data.HiltTestRunner"
     }
 
@@ -42,10 +44,7 @@ dependencies {
     // Project dependency
     implementation(project(":domain"))
 
-    // Dagger Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.50")
-    testImplementation("junit:junit:4.13.2")
-    ksp("com.google.dagger:hilt-android-compiler:2.50")
+
 
     // Retrofit dependencies
     api("com.squareup.retrofit2:retrofit:2.9.0")
@@ -54,6 +53,7 @@ dependencies {
     api("com.squareup.okhttp3:okhttp:4.12.0")
     api("com.google.code.gson:gson:2.10.1")
     api("com.squareup.retrofit2:converter-gson:2.9.0")
+    api("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
     // RxJava dependencies
     implementation("io.reactivex.rxjava2:rxandroid:2.1.1")
@@ -74,8 +74,14 @@ dependencies {
     testImplementation("androidx.test:runner:1.5.2")
     testImplementation("com.google.dagger:hilt-android-testing:2.50")
     kspTest("com.google.dagger:hilt-android-compiler:2.50")
-    testImplementation("org.robolectric:robolectric:4.11.1")
 
+    // Dagger Hilt dependencies
+    implementation("com.google.dagger:hilt-android:2.50")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("junit:junit:4.13.2")
+    testImplementation("androidx.test.ext:junit:1.1.5")
+    testImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.50")
 
 }
 

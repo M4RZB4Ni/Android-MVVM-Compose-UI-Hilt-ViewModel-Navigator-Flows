@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.google.gson.Gson
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.marzbani.data.mapper.MapperFactoryImpl
 import com.marzbani.data.repository.NodesRepositoryImpl
 import com.marzbani.data.source.NodesService
@@ -18,7 +19,6 @@ import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -38,7 +38,6 @@ object NetworkModule {
      * Provides Retrofit instance for making network requests.
      *
      * @param gsonConverterFactory Gson converter factory for handling JSON serialization and deserialization.
-     * @param rxJava2CallAdapterFactory RxJava adapter factory for supporting reactive programming with Retrofit.
      * @param okHttpClient OkHttpClient instance for configuring network requests.
      * @return Configured Retrofit instance.
      */
@@ -46,13 +45,12 @@ object NetworkModule {
     @Singleton
     fun providesRetrofit(
         gsonConverterFactory: GsonConverterFactory,
-        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
         okHttpClient: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(gsonConverterFactory)
-            .addCallAdapterFactory(rxJava2CallAdapterFactory)
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build()
     }
@@ -110,16 +108,7 @@ object NetworkModule {
         return GsonConverterFactory.create()
     }
 
-    /**
-     * Provides RxJava2CallAdapterFactory instance for Retrofit.
-     *
-     * @return RxJava2CallAdapterFactory instance.
-     */
-    @Provides
-    @Singleton
-    fun providesRxJavaCallAdapterFactory(): RxJava2CallAdapterFactory {
-        return RxJava2CallAdapterFactory.create()
-    }
+
 
     /**
      * Provides network availability status using ConnectivityManager.
