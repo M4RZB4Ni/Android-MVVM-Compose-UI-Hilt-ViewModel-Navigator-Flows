@@ -7,7 +7,8 @@ import com.marzbani.data.source.NodesService
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.entity.TreeNodeEntity
 import com.marzbani.domain.repository.NodesRepository
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 /**
  * Implementation of the [NodesRepository] interface for handling node-related data.
@@ -21,26 +22,35 @@ class NodesRepositoryImpl(
     private val nodeMap: TreeNodeEntityMapper,
     private val detailsEntityMapper: DetailsEntityMapper
 ) : NodesRepository {
+    override fun getNodes(url: String): Flow<List<TreeNodeEntity>> = flow {
+        try {
 
-    /**
-     * Retrieves a list of tree nodes based on the provided URL.
-     *
-     * @param url The URL for retrieving tree nodes.
-     * @return A [Single] emitting the list of [TreeNodeEntity] objects.
-     */
-    override fun getNodes(url: String): Single<List<TreeNodeEntity>> {
-        return service.getNodes(url)
-            .map { nodeMap.toEntityList(it) }
+            service.getNodes(url).apply {
+                emit(nodeMap.toEntityList(this))
+            }
+        }catch (e: Exception)
+        {
+            emit(emptyList())
+        }
     }
+
+
+
 
     /**
      * Retrieves additional data for a specific data code.
      *
      * @param dataCode The data code for retrieving additional data.
-     * @return A [Single] emitting the [DetailsEntity] object.
+     * @return A [Flow] emitting the [DetailsEntity] object.
      */
-    override fun getAdditionalData(dataCode: String): Single<DetailsEntity> {
-        return service.getAdditionalData(dataCode)
-            .map { detailsEntityMapper.toEntity(it) }
+    override fun getAdditionalData(dataCode: String): Flow<DetailsEntity> = flow {
+        try {
+            service.getAdditionalData(dataCode)
+                .apply { emit(detailsEntityMapper.toEntity(this)) }
+        }catch (e: Exception)
+        {
+            emit(DetailsEntity())
+        }
+
     }
 }

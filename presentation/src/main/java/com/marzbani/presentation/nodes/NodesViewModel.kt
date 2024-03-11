@@ -5,12 +5,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavController
 import com.marzbani.domain.entity.TreeNodeEntity
 import com.marzbani.domain.usecase.GetNodesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -41,23 +43,13 @@ class NodesViewModel @Inject constructor(private val getNodesUseCase: GetNodesUs
 
     // Function to handle the loading of data
     private fun loadData() {
-        getNodesUseCase.execute(
-            params = "data.json",
-            onSuccess = {
+        viewModelScope.launch {
+            getNodesUseCase.invoke("data.json").collect{
                 _nodesData.value = it
-            },
-            onError = { error ->
-                // Handle errors during data loading
-                handleDataLoadError(error)
             }
-        )
+        }
     }
 
-    // Function to handle errors during data loading
-    private fun handleDataLoadError(error: Throwable) {
-        // show an error message to the user
-        Log.e("NodesViewModel", "Error loading data: ${error.message}", error)
-    }
 
     // Function triggered when a tree node needs to be removed
     fun onRemoveClick(selectedNode: TreeNodeEntity) {

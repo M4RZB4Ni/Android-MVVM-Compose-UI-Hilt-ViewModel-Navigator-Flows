@@ -3,23 +3,27 @@ package com.marzbani.domain.fake
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.entity.TreeNodeEntity
 import com.marzbani.domain.repository.NodesRepository
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 class FakeNodeRepository : NodesRepository {
 
-    private val nodesList : Single<List<TreeNodeEntity>> = Single.just(listOf(TreeNodeEntity("Node one","",
-        listOf(TreeNodeEntity("Node two","",
-            listOf(TreeNodeEntity("Node three","",
-                listOf()
-            ))
-        ))
-    )))
-    private val nodeItem:Single<DetailsEntity> = Single.just(DetailsEntity("1","First January","First January","First January","First January","Description"))
-    override fun getNodes(url: String): Single<List<TreeNodeEntity>> {
+    private val nodesList: Flow<List<TreeNodeEntity>> by lazy {
+        val nodeThree = TreeNodeEntity("Node three", "", emptyList())
+        val nodeTwo = TreeNodeEntity("Node two", "", listOf(nodeThree))
+        val nodeOne = TreeNodeEntity("Node one", "", listOf(nodeTwo))
+
+        flowOf((listOf(nodeOne)))
+    }
+
+    private val nodeItem:Flow<DetailsEntity> = flowOf(DetailsEntity("1","First January","First January","First January","First January","Description"))
+    override suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>> {
+        println("getNodes called with url: $url")
         return nodesList
     }
 
-    override fun getAdditionalData(dataCode: String): Single<DetailsEntity> {
+    override suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity> {
+        println("getAdditionalData called with dataCode: $dataCode")
         return nodeItem
     }
 }

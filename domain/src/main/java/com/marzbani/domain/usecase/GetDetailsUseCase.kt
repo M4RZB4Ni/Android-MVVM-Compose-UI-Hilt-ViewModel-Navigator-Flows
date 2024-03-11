@@ -2,8 +2,7 @@ package com.marzbani.domain.usecase
 
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.repository.NodesRepository
-import com.marzbani.domain.usecase.base.SingleUseCase
-import io.reactivex.Single
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -11,16 +10,9 @@ import javax.inject.Inject
  *
  * @param repository Repository providing data access methods.
  */
-class GetDetailsUseCase @Inject constructor(private val repository: NodesRepository) :
-    SingleUseCase<String, DetailsEntity>() {
+class GetDetailsUseCase @Inject constructor(
+    private val repository: NodesRepository,
+)  {
+    operator fun invoke(params: String) : Flow<DetailsEntity> = repository.getAdditionalData(params)
 
-    /**
-     * Build the Single use case to get details information for the provided data code.
-     *
-     * @param params Data code for which details information is to be retrieved.
-     * @return Single representing the asynchronous operation.
-     */
-    override fun buildUseCaseSingle(params: String): Single<DetailsEntity> {
-        return repository.getAdditionalData(params)
-    }
 }

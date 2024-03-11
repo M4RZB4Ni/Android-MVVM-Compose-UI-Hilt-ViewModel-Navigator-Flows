@@ -12,5 +12,4 @@
     <string name="description">Description</string>
     <string name="remove">Remove</string>
     <string name="move">Move</string>
-    <string name="title_activity_main">MainActivity</string>
 </resources>
