@@ -1,10 +1,10 @@
-# Img.ly Task Assessment
+# Android MVVM backed by Jetpack UI and Navigation, Retrofit2, Hilt, Flows, and Coroutines
 
 
 
 ## Description
 
-The project is about sending a get request to the server and parse the response as json format to show in the application with details.
+The project is about sending a get request to the server and parsing the response as JSON format to show in the application with details.
 
 ## Table of Contents
 
@@ -17,8 +17,8 @@ The project is about sending a get request to the server and parse the response 
 
 ## Features
 
-- Nodes: this feature include sending the request to the server and show responses with moving and deleting.
-- Details: while user click on items in the LazyList of Nodes page, it will redirect to details feature(page) to gathering details of relevant node from server.
+- Nodes: this feature includes sending the request to the server and showing responses with moving and deleting.
+- Details: while the user clicks on items in the LazyList of Nodes page, it will redirect to the details feature(page) to gather details of relevant nodes from the server.
 
 ## Architecture
 
@@ -35,7 +35,7 @@ This project follows the **Clean Architecture** principles. It separates concern
    - Defines interfaces for data access
 
 3. **Data Layer**:
-   - Implements data sources (remote) (in this app I did not used offline mechanisms like Room.
+   - Implements data sources (remote) (in this app I did not use offline mechanisms like Room.
    - Communicates with external services (APIs)
    - Depends on the Domain layer
 
