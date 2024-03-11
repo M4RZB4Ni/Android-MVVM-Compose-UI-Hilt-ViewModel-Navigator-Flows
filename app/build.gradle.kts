@@ -61,21 +61,16 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":presentation"))
 
-    // Multidex support
-    implementation("androidx.multidex:multidex:2.0.1")
 
     // Dagger Hilt dependencies
     implementation("com.google.dagger:hilt-android:2.50")
     ksp("com.google.dagger:hilt-android-compiler:2.50")
 
-   
+
 
     // Compose dependencies
     implementation(platform("androidx.compose:compose-bom:2024.02.02"))
     implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
 
 
 }

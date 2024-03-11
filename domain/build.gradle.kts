@@ -39,18 +39,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.50")
     ksp("com.google.dagger:hilt-android-compiler:2.50")
 
-    // Kotlin dependencies
-    api(platform("org.jetbrains.kotlin:kotlin-bom:1.9.22"))
-
-
-
-    // AndroidX dependencies
-    implementation("androidx.core:core-ktx:1.12.0")
-
-
     // Testing dependencies
     testImplementation("junit:junit:4.13.2")
-    testImplementation ("com.google.truth:truth:1.1")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     testImplementation ("androidx.arch.core:core-testing:2.2.0")
