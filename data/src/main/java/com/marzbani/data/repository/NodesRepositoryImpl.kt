@@ -8,8 +8,7 @@ import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.entity.TreeNodeEntity
 import com.marzbani.domain.repository.NodesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 
 /**
  * Implementation of the [NodesRepository] interface for handling node-related data.
@@ -23,21 +22,20 @@ class NodesRepositoryImpl(
     private val nodeMap: TreeNodeEntityMapper,
     private val detailsEntityMapper: DetailsEntityMapper
 ) : NodesRepository {
+    override fun getNodes(url: String): Flow<List<TreeNodeEntity>> = flow {
+        try {
 
-    /**
-     * Retrieves a list of tree nodes based on the provided URL.
-     *
-     * @param url The URL for retrieving tree nodes.
-     * @return A [Flow] emitting the list of [TreeNodeEntity] objects.
-     */
-    override suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>> {
-        return try {
-            service.getNodes(url)
-                .map { nodeMap.toEntityList(it) }
-        }catch (e: Exception){
-            flowOf(emptyList())
+            service.getNodes(url).apply {
+                emit(nodeMap.toEntityList(this))
+            }
+        }catch (e: Exception)
+        {
+            emit(emptyList())
         }
     }
+
+
+
 
     /**
      * Retrieves additional data for a specific data code.
@@ -45,13 +43,14 @@ class NodesRepositoryImpl(
      * @param dataCode The data code for retrieving additional data.
      * @return A [Flow] emitting the [DetailsEntity] object.
      */
-    override suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity> {
-        return try {
-
+    override fun getAdditionalData(dataCode: String): Flow<DetailsEntity> = flow {
+        try {
             service.getAdditionalData(dataCode)
-                .map { detailsEntityMapper.toEntity(it) }
-        }catch (e:Exception){
-            flowOf(DetailsEntity())
+                .apply { emit(detailsEntityMapper.toEntity(this)) }
+        }catch (e: Exception)
+        {
+            emit(DetailsEntity())
         }
+
     }
 }

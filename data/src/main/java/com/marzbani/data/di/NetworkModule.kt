@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import com.google.gson.Gson
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import com.google.gson.GsonBuilder
 import com.marzbani.data.mapper.MapperFactoryImpl
 import com.marzbani.data.repository.NodesRepositoryImpl
 import com.marzbani.data.source.NodesService
@@ -22,6 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 // Base URL for the Retrofit
 const val BASE_URL = "https://ubique.img.ly/frontend-tha/"
@@ -50,7 +51,6 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(gsonConverterFactory)
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build()
     }
@@ -105,7 +105,10 @@ object NetworkModule {
     @Provides
     @Singleton
     fun providesGsonConverterFactory(): GsonConverterFactory {
-        return GsonConverterFactory.create()
+        return GsonConverterFactory.create(
+            GsonBuilder()
+            .setLenient()
+            .create())
     }
 
 

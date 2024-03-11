@@ -13,6 +13,6 @@ import javax.inject.Inject
 class GetDetailsUseCase @Inject constructor(
     private val repository: NodesRepository,
 )  {
-    suspend operator fun invoke(params: String) : Flow<DetailsEntity> = repository.getAdditionalData(params)
+    operator fun invoke(params: String) : Flow<DetailsEntity> = repository.getAdditionalData(params)
 
 }

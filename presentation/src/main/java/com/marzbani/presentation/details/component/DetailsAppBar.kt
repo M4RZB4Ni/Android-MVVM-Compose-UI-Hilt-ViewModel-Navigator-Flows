@@ -59,8 +59,8 @@ fun DetailsAppBar(
                 contentDescription = stringResource(id = R.string.back),
                 tint = Color.White,
                 modifier = Modifier
-                    .size(24.dp)
-                    .padding(8.dp)
+                    .size(34.dp)
+                    .padding(4.dp)
                     .clip(CircleShape)
                     .clickable { onBackClick() }
             )

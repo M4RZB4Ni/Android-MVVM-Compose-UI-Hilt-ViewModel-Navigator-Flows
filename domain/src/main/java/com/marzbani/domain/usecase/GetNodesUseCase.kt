@@ -11,5 +11,5 @@ import javax.inject.Inject
  * @param repository Repository providing data access methods.
  */
 class GetNodesUseCase @Inject constructor(private val repository: NodesRepository) {
-   suspend operator fun invoke(params:String) : Flow<List<TreeNodeEntity>> = repository.getNodes(params)
+   operator fun invoke(params:String) : Flow<List<TreeNodeEntity>> = repository.getNodes(params)
 }

@@ -20,7 +20,7 @@ interface NodesService {
      * @return A [Flow] emitting the list of [TreeNodeModel] objects.
      */
     @GET
-    suspend fun getNodes(@Url url: String): Flow<List<TreeNodeModel>>
+    suspend fun getNodes(@Url url: String): List<TreeNodeModel>
 
     /**
      * Fetches additional data for a specific data code.
@@ -29,5 +29,5 @@ interface NodesService {
      * @return A [Flow] emitting the [DetailsModel] object.
      */
     @GET("entries/{dataCode}.json")
-    suspend fun getAdditionalData(@Path("dataCode") imageCode: String): Flow<DetailsModel>
+    suspend fun getAdditionalData(@Path("dataCode") imageCode: String): DetailsModel
 }

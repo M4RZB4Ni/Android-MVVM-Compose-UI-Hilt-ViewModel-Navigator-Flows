@@ -38,7 +38,6 @@ class NodesViewModel @Inject constructor(private val getNodesUseCase: GetNodesUs
 
     // Initial loading of data when the ViewModel is created
     init {
-
         loadData()
     }
 
