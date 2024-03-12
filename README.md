@@ -46,9 +46,6 @@ This project follows the **Clean Architecture** principles. It separates concern
 2. Open the project in Android Studio.
 3. Build and run the app on an emulator or device.
 
-## Usage
-
-Provide instructions on how to use your app. Include screenshots or GIFs if possible.
 
 ## Contributing
 
