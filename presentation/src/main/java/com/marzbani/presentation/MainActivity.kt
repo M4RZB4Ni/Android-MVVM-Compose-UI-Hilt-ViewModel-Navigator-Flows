@@ -3,7 +3,6 @@ package com.marzbani.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Surface
 import androidx.navigation.compose.rememberNavController
 import com.marzbani.presentation.navigation.AppNavHost
 import com.marzbani.presentation.theme.ImglyTaskTheme
@@ -27,15 +26,13 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Set the content of the activity using Compose
-        setContent {
-            // Apply the app theme using ImglyTaskTheme
-            ImglyTaskTheme {
+            // Set the content of the activity using Compose
+            setContent {
+                ImglyTaskTheme {
+                val navController = rememberNavController()
                 // Create a Compose Surface as the top-level UI container
-                Surface {
-                    // Set up the navigation host using AppNavHost and rememberNavController
-                    AppNavHost(navController = rememberNavController())
-                }
+                AppNavHost(navController = navController)
+
             }
         }
     }

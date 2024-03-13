@@ -5,6 +5,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -17,7 +18,6 @@ import com.marzbani.presentation.nodes.component.TreeNodeItem
  * NodesScreen is a Composable function responsible for displaying the list of tree nodes.
  * It utilizes a LazyColumn to efficiently handle the display of tree nodes using TreeNodeItem.
  *
- * @param modifier The modifier for styling and positioning the NodesScreen.
  * @param viewModel The NodesViewModel containing the logic and data for the screen.
  * @param navController The NavHostController for handling navigation within the app.
  */
@@ -25,10 +25,13 @@ import com.marzbani.presentation.nodes.component.TreeNodeItem
 
 @Composable
 fun NodesScreen(
-    modifier: Modifier,
     viewModel: NodesViewModel,
     navController: NavHostController
 ) {
+    LaunchedEffect(key1 = viewModel.nodesData) {
+        viewModel.loadData()
+    }
+
     // Collect the data as a Compose state
     val data by viewModel.nodesData.collectAsState()
 
@@ -45,13 +48,12 @@ fun NodesScreen(
     ) { paddingValues ->
         // LazyColumn for efficiently displaying a list of items
         LazyColumn(
-            modifier = modifier.padding(paddingValues),
+            modifier = Modifier.padding(paddingValues),
             content = {
                 // Iterate over the data to create TreeNodeItem for each node
                 items(data) { treeNode ->
                     // TreeNodeItem to display a tree node
                     TreeNodeItem(
-                        modifier = modifier,
                         treeNode = treeNode,
                         onItemClick = { viewModel.onItemClick(it, navController) },
                         onRemoveClick = { viewModel.onRemoveClick(it) },

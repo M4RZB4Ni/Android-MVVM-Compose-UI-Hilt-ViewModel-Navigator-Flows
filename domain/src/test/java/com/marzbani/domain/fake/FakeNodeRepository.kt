@@ -17,12 +17,12 @@ class FakeNodeRepository : NodesRepository {
     }
 
     private val nodeItem:Flow<DetailsEntity> = flowOf(DetailsEntity("1","First January","First January","First January","First January","Description"))
-    override suspend fun getNodes(url: String): Flow<List<TreeNodeEntity>> {
+    override fun getNodes(url: String): Flow<List<TreeNodeEntity>> {
         println("getNodes called with url: $url")
         return nodesList
     }
 
-    override suspend fun getAdditionalData(dataCode: String): Flow<DetailsEntity> {
+    override fun getAdditionalData(dataCode: String): Flow<DetailsEntity> {
         println("getAdditionalData called with dataCode: $dataCode")
         return nodeItem
     }

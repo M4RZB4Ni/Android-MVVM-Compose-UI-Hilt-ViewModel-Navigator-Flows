@@ -52,12 +52,12 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.6.3")
 
 
     // Dagger Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.50")
-    ksp("com.google.dagger:hilt-android-compiler:2.50")
+    implementation("com.google.dagger:hilt-android:2.51")
+    ksp("com.google.dagger:hilt-android-compiler:2.51")
 
 }
 
