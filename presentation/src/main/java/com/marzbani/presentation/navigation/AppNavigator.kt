@@ -2,7 +2,6 @@
 package com.marzbani.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -11,19 +10,17 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.marzbani.presentation.details.DetailsScreen
 import com.marzbani.presentation.details.DetailsViewModel
-import com.marzbani.presentation.nodes.NodesViewModel
 import com.marzbani.presentation.nodes.NodesScreen
+import com.marzbani.presentation.nodes.NodesViewModel
 
 /**
  * Composable function defining the navigation host for the app.
  *
- * @param modifier Custom modifier for additional styling if needed.
  * @param navController NavHostController for handling the route.
  * @param startDestination Starting destination for the navigation host.
  */
 @Composable
 fun AppNavHost(
-    modifier: Modifier = Modifier,
     navController: NavHostController,
     startDestination: String = NavigationItem.NODES.route,
 ) {
@@ -34,7 +31,7 @@ fun AppNavHost(
         // Composable for the NODES screen
         composable(NavigationItem.NODES.route) {
             val viewModel = hiltViewModel<NodesViewModel>()
-            NodesScreen(modifier, viewModel, navController)
+            NodesScreen(viewModel, navController)
         }
 
         // Composable for the DETAILS screen with a dynamic nodeID argument

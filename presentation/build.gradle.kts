@@ -36,11 +36,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+//    packaging {
+//        resources {
+//            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+//        }
+//    }
     subprojects {
         apply(plugin = "org.jetbrains.dokka")
 //        tasks.dokkaHtmlPartial.dependsOn(":presentation:kaptReleaseKotlin")
@@ -54,9 +54,9 @@ dependencies {
     implementation(project(":domain"))
 
     // Dagger Hilt dependencies
-    implementation("com.google.dagger:hilt-android:2.50")
+    implementation("com.google.dagger:hilt-android:2.51")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-    ksp("com.google.dagger:hilt-android-compiler:2.50")
+    ksp("com.google.dagger:hilt-android-compiler:2.51")
 
     // Compose dependencies
     implementation(platform("androidx.compose:compose-bom:2024.02.02"))

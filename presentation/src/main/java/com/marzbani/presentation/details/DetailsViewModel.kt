@@ -1,13 +1,11 @@
 package com.marzbani.presentation.details
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.marzbani.domain.entity.DetailsEntity
 import com.marzbani.domain.usecase.GetDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -29,11 +27,9 @@ class DetailsViewModel @Inject constructor(private val detailsUseCase: GetDetail
      *
      * @param nodeId The id of the node to fetch details for.
      */
-    fun getDetails(nodeId: String) {
-        viewModelScope.launch {
-            detailsUseCase.invoke(nodeId).collect{
-                _details.value = it
-            }
+   suspend fun getDetails(nodeId: String) {
+        detailsUseCase.invoke(nodeId).collect{
+            _details.value = it
         }
     }
 

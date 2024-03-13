@@ -20,7 +20,6 @@ import com.marzbani.domain.entity.TreeNodeEntity
  * It displays the content of the node and, if available, recursively renders its children using LazyColumn.
  * In edit mode, it also shows edit actions for removing and moving the node.
  *
- * @param modifier The modifier for styling and positioning the TreeNodeItem.
  * @param treeNode The TreeNodeEntity representing the data to be displayed.
  * @param onItemClick A callback function triggered when the tree node is clicked.
  * @param onRemoveClick A callback function triggered when the remove button is clicked in edit mode.
@@ -31,7 +30,6 @@ import com.marzbani.domain.entity.TreeNodeEntity
  */
 @Composable
 fun TreeNodeItem(
-    modifier: Modifier,
     treeNode: TreeNodeEntity,
     onItemClick: (TreeNodeEntity) -> Unit,
     onRemoveClick: (TreeNodeEntity) -> Unit,
@@ -40,7 +38,7 @@ fun TreeNodeItem(
 ) {
     // Card for styling and elevation
     Card(
-        modifier = modifier
+        modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
         elevation = CardDefaults.cardElevation(
@@ -73,7 +71,6 @@ fun TreeNodeItem(
                         children.forEach { childNode ->
                             // Recursive call to TreeNodeItem for each child node
                             TreeNodeItem(
-                                modifier = Modifier,
                                 treeNode = childNode,
                                 onItemClick = onItemClick,
                                 onRemoveClick = onRemoveClick,
